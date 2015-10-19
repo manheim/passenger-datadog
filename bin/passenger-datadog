@@ -3,4 +3,4 @@ $LOAD_PATH.unshift(File.dirname(File.realpath(__FILE__)) + '/../lib')
 
 require 'passenger_datadog'
 
-PassengerDatadog.new.status
+PassengerDatadog.run
