@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.dirname(File.realpath(__FILE__)) + '/../lib')
+require 'daemons'
+require 'passenger_datadog'
+
+passenger_datadog = PassengerDatadog.new
+
+Daemons.run_proc('passenger-datadog-daemon') do
+  loop do
+    passenger_datadog.status
+    sleep(5)
+  end
+end
