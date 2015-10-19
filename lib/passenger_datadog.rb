@@ -7,33 +7,36 @@ class PassengerDatadog
 
   class << self
     def run
-      @statsd = Statsd.new
-      #status = `sudo passenger-status --show=xml`
       status = `passenger-status --show=xml`
+      #status = `sudo passenger-status --show=xml`
       return if status.empty?
 
-      # Good job Passenger 4.0.10. Return non xml in your xml output.
-      status = status.split("\n")[3..-1].join("\n") unless status.start_with?('<?xml')
-      parsed = Nokogiri::XML(status)
+      statsd = Statsd.new
 
-      pool_used = parsed.xpath('//process_count').text
-      @statsd.gauge('passenger.pool.used', pool_used)
+      statsd.batch do |s|
+        # Good job Passenger 4.0.10. Return non xml in your xml output.
+        status = status.split("\n")[3..-1].join("\n") unless status.start_with?('<?xml')
+        parsed = Nokogiri::XML(status)
 
-      pool_max = parsed.xpath('//max').text
-      @statsd.gauge('passenger.pool.max', pool_max)
+        pool_used = parsed.xpath('//process_count').text
+        s.gauge('passenger.pool.used', pool_used)
 
-      request_queue = parsed.xpath('//supergroups/supergroup/group/get_wait_list_size').text
-      @statsd.gauge('passenger.request_queue', request_queue)
+        pool_max = parsed.xpath('//max').text
+        s.gauge('passenger.pool.max', pool_max)
 
-      parsed.xpath('//supergroups/supergroup/group').each do |group|
-        GROUP_STATS.each do |stat|
-          @statsd.gauge("passenger.#{stat}", group.xpath(stat).text)
+        request_queue = parsed.xpath('//supergroups/supergroup/group/get_wait_list_size').text
+        s.gauge('passenger.request_queue', request_queue)
+
+        parsed.xpath('//supergroups/supergroup/group').each do |group|
+          GROUP_STATS.each do |stat|
+            s.gauge("passenger.#{stat}", group.xpath(stat).text)
+          end
         end
-      end
 
-      parsed.xpath('//supergroups/supergroup/group/processes/process').each_with_index do |process, index|
-        PROCESS_STATS.each do |stat|
-          @statsd.gauge("passenger.#{stat}", process.xpath(stat).text, tags: ["passenger-process:#{index}"])
+        parsed.xpath('//supergroups/supergroup/group/processes/process').each_with_index do |process, index|
+          PROCESS_STATS.each do |stat|
+            s.gauge("passenger.#{stat}", process.xpath(stat).text, tags: ["passenger-process:#{index}"])
+          end
         end
       end
     end
