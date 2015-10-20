@@ -35,7 +35,7 @@ class PassengerDatadog
 
         parsed.xpath('//supergroups/supergroup/group/processes/process').each_with_index do |process, index|
           PROCESS_STATS.each do |stat|
-            s.gauge("passenger.#{stat}", process.xpath(stat).text, tags: ["passenger-process:#{index}"])
+            s.gauge("passenger.#{stat}", process.xpath(stat).text, :tags => ["passenger-process:#{index}"])
           end
         end
       end

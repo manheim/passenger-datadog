@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name = 'passenger_datadog'
   s.version = '0.1.0'
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 1.8.7'
   s.authors = ['Ryan Rosenblum']
   s.description = <<-EOF
     A tool for sending Passenger stats to Datadog.
@@ -19,9 +19,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.8.23'
   s.summary = 'A tool for sending Passenger stats to Datadog'
 
-  s.add_runtime_dependency('daemons', '~> 1.2')
+  s.add_runtime_dependency('daemons', '~> 1.0')
   s.add_runtime_dependency('dogstatsd-ruby', '~> 1.5')
-  s.add_runtime_dependency('nokogiri', '~> 1.6', '>= 1.6.6.2')
+  s.add_runtime_dependency('nokogiri', '<= 1.5.11')
   s.add_runtime_dependency('passenger', '>= 4.0.0', '<= 6.0.0')
 
   s.add_development_dependency('bundler', '~> 1.3')
