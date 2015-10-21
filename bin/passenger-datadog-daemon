@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(File.dirname(File.expand_path(__FILE__)) + '/../lib')
 require 'daemons'
 require 'passenger_datadog'
 
-Daemons.run_proc('passenger-datadog-daemon') do
+Daemons.run_proc('passenger-datadog-daemon', :dir_mode => :system) do
   loop do
     PassengerDatadog.run
     sleep(30)
