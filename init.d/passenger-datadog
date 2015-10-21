@@ -1,0 +1,18 @@
+#!/bin/env sh
+#
+# passenger-datadog
+#
+# chkconfig: 345 86 14 # Just after/before Datadog
+# description: Send stats from Passenger to Datadog.
+
+### BEGIN INIT INFO
+# Short-Description: Start and stop passenger-datadog-daemon
+# Description: Send stats from Passenger to Datadog.
+# Required-Start:
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+### END INIT INFO
+
+
+passenger-datadog-daemon "$1"
