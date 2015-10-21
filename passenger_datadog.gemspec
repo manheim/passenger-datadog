@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'passenger_datadog'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.8.7'
   s.authors = ['Ryan Rosenblum']
