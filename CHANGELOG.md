@@ -1,6 +1,6 @@
 # Change log
 
-## master (unreleased)
+## 0.2.0 (2015-10-22)
 
 ### Changes
 
