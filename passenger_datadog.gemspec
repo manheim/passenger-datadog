@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   EOF
 
   s.email = 'passenger_datadog@manheim.com'
-  s.files = %w(lib/passenger_datadog.rb bin/passenger-datadog bin/passenger-datadog-daemon)
+  s.files = %w(lib/passenger_datadog.rb bin/passenger-datadog bin/passenger-datadog)
   s.test_files = []
-  s.executables = %w(passenger-datadog passenger-datadog-daemon)
+  s.executables = %w(passenger-datadog passenger-datadog)
   s.extra_rdoc_files = ['LICENSE', 'README.md']
   s.homepage = 'https://github.com/rrosenblum/passenger-datadog'
   s.licenses = ['MIT']

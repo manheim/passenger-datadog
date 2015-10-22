@@ -6,7 +6,7 @@
 # description: Send stats from Passenger to Datadog.
 
 ### BEGIN INIT INFO
-# Short-Description: Start and stop passenger-datadog-daemon
+# Short-Description: Start and stop passenger-datadog
 # Description: Send stats from Passenger to Datadog.
 # Required-Start:
 # Required-Stop:
@@ -15,4 +15,4 @@
 ### END INIT INFO
 
 
-passenger-datadog-daemon "$1"
+passenger-datadog "$1"
