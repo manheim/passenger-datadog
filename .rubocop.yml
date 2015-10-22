@@ -29,6 +29,10 @@ Style/Documentation:
   Exclude:
     - 'lib/passenger_datadog.rb'
 
+Style/Encoding:
+  AutoCorrectEncodingComment: '# encoding: UTF-8'
+  Enabled: true
+
 # Offense count: 2
 # Configuration parameters: Exclude.
 Style/FileName:

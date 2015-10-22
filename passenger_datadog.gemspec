@@ -1,3 +1,4 @@
+# encoding: UTF-8
 Gem::Specification.new do |s|
   s.name = 'passenger_datadog'
   s.version = '0.2.0'

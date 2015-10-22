@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'passenger_datadog'

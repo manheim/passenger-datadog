@@ -1,5 +1,11 @@
 # Change log
 
+## master (unreleased)
+
+### Changes
+
+* Add and enforce the use of `UTF-8` encoding. ([@rrosenblum][])
+
 ## 0.2.0 (2015-10-22)
 
 ### Changes
