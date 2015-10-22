@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'statsd'
 
 class PassengerDatadog
-  GROUP_STATS = %W(capacity_used processes_being_spawned enabled_process_count disabling_process_count disabled_process_count).freeze
+  GROUP_STATS = %w(capacity_used processes_being_spawned enabled_process_count disabling_process_count disabled_process_count).freeze
   PROCESS_STATS = %w(processed sessions busyness concurrency cpu rss private_dirty pss swap real_memory vmsize).freeze
 
   class << self
