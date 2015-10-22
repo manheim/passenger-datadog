@@ -8,8 +8,7 @@ provided by [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby))
 
 In order to gather stats on all Passenger instances, Passenger recommends
 running `passenger-status` as `root`. Therefore, it is recommended that
-`passenger_datadog` be run as `root` as well. `passenger_datadog` will also
-work if run as the same user that is used to run the application in Passenger.
+`passenger_datadog` be run as `root` as well.
 
 If running `passenger_datadog` as a user other than the user that owns the application
 in Passenger, make sure that same version of Passenger is installed for both users.
