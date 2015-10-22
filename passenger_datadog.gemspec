@@ -27,4 +27,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency('bundler', '~> 1.3')
   s.add_development_dependency('rake', '~> 10.1')
   s.add_development_dependency('rspec', '~> 3.3')
+
+  if RUBY_VERSION >= '1.9.3'
+    s.add_development_dependency('rubocop', '~> 0.34.2')
+  end
 end
