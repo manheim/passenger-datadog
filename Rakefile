@@ -12,7 +12,7 @@ if RUBY_VERSION >= '1.9.3'
     task.options = ['--display-cop-names']
   end
 
-  task :default => [:rubocop, :spec]
+  task :default => [:spec, :rubocop]
 else
   task :default => [:spec]
 end
