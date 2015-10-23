@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.test_files = []
   s.executables = %w(passenger-datadog passenger-datadog)
   s.extra_rdoc_files = ['LICENSE', 'README.md']
-  s.homepage = 'https://github.com/rrosenblum/passenger-datadog'
+  s.homepage = 'https://github.com/manheim/passenger-datadog'
   s.licenses = ['MIT']
   s.require_paths = ['lib']
   s.rubygems_version = '1.8.23'
