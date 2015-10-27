@@ -1,4 +1,8 @@
+[![Gem Version](https://badge.fury.io/rb/passenger_datadog.svg)](https://badge.fury.io/rb/passenger_datadog)
 [![Build Status](https://travis-ci.org/manheim/passenger-datadog.svg?branch=master)](https://travis-ci.org/manheim/passenger-datadog)
+[![Code Climate](https://codeclimate.com/github/manheim/passenger-datadog/badges/gpa.svg)](https://codeclimate.com/github/manheim/passenger-datadog)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 # passenger-datadog
 
 Inspired by [passengeri-datadog-monitor](https://github.com/Sjeanpierre/passenger-datadog-monitor)
