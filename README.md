@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/manheim/passenger-datadog.svg?branch=master)](https://travis-ci.org/manheim/passenger-datadog)
 # passenger-datadog
 
 Inspired by [passengeri-datadog-monitor](https://github.com/Sjeanpierre/passenger-datadog-monitor)
