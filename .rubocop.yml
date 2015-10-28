@@ -11,7 +11,7 @@ AllCops:
 
 # Offense count: 1
 Metrics/AbcSize:
-  Max: 30
+  Max: 33
 
 # Offense count: 94
 # Configuration parameters: AllowURI, URISchemes.
@@ -21,7 +21,7 @@ Metrics/LineLength:
 # Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
-  Max: 23
+  Max: 27
 
 # Offense count: 1
 # Configuration parameters: Exclude.
