@@ -2,6 +2,9 @@
 
 ## master (unreleased)
 
+### Bug Fixes
+
+* Do not send empty stats from Passenger 4 to Datadog
 
 ##  0.2.1 (2015-10-23)
 

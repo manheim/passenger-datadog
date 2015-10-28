@@ -29,13 +29,17 @@ class PassengerDatadog
 
         parsed.xpath('//supergroups/supergroup/group').each do |group|
           GROUP_STATS.each do |stat|
-            s.gauge("passenger.#{stat}", group.xpath(stat).text)
+            value = group.xpath(stat).text
+            next if value.empty?
+            s.gauge("passenger.#{stat}", value)
           end
         end
 
         parsed.xpath('//supergroups/supergroup/group/processes/process').each_with_index do |process, index|
           PROCESS_STATS.each do |stat|
-            s.gauge("passenger.#{stat}", process.xpath(stat).text, :tags => ["passenger-process:#{index}"])
+            value = process.xpath(stat).text
+            next if value.empty?
+            s.gauge("passenger.#{stat}", value, :tags => ["passenger-process:#{index}"])
           end
         end
       end
