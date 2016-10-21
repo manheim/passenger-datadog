@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 Gem::Specification.new do |s|
   s.name = 'passenger_datadog'
   s.version = '0.2.1'
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake', '~> 10.1')
   s.add_development_dependency('rspec', '~> 3.3')
 
-  if RUBY_VERSION >= '1.9.3'
-    s.add_development_dependency('rubocop', '~> 0.37.0')
+  if RUBY_VERSION >= '2.0.0'
+    s.add_development_dependency('rubocop', '~> 0.44.0')
   end
 end
