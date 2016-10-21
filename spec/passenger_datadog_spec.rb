@@ -6,7 +6,9 @@ describe PassengerDatadog do
   let(:statsd) { instance_double(Statsd) }
 
   context 'passenger not running' do
-    before { allow(described_class).to receive(:`).and_return('') }
+    before do
+      allow(described_class).to receive(:`).and_return('')
+    end
 
     it 'does not send stats to datadog' do
       expect(Statsd).not_to receive(:new)
@@ -16,7 +18,9 @@ describe PassengerDatadog do
   end
 
   context 'passenger 4' do
-    before { allow(described_class).to receive(:`).and_return(File.read('spec/fixtures/passenger_4_status.xml')) }
+    before do
+      allow(described_class).to receive(:`).and_return(File.read('spec/fixtures/passenger_4_status.xml'))
+    end
 
     it 'sends stats to datadog' do
       allow(Statsd).to receive(:new).and_return(statsd)
@@ -91,43 +95,50 @@ describe PassengerDatadog do
   end
 
   context 'passenger 5' do
-    before { allow(described_class).to receive(:`).and_return(File.read('spec/fixtures/passenger_5_status.xml')) }
+    before do
+      allow(described_class).to receive(:`).and_return(File.read('spec/fixtures/passenger_5_status.xml'))
+    end
+
+    let(:passenger_status) do
+      [['passenger.pool.used', '2'],
+       ['passenger.pool.max', '5'],
+       ['passenger.request_queue', '0'],
+       ['passenger.capacity_used', '2'],
+       ['passenger.processes_being_spawned', '0'],
+       ['passenger.enabled_process_count', '2'],
+       ['passenger.disabling_process_count', '0'],
+       ['passenger.disabled_process_count', '0'],
+       ['passenger.processed', '2', :tags => ['passenger-process:0']],
+       ['passenger.sessions', '0', :tags => ['passenger-process:0']],
+       ['passenger.busyness', '0', :tags => ['passenger-process:0']],
+       ['passenger.concurrency', '1', :tags => ['passenger-process:0']],
+       ['passenger.cpu', '0', :tags => ['passenger-process:0']],
+       ['passenger.rss', '409596', :tags => ['passenger-process:0']],
+       ['passenger.private_dirty', '126456', :tags => ['passenger-process:0']],
+       ['passenger.pss', '267231', :tags => ['passenger-process:0']],
+       ['passenger.swap', '0', :tags => ['passenger-process:0']],
+       ['passenger.real_memory', '126456', :tags => ['passenger-process:0']],
+       ['passenger.vmsize', '812632', :tags => ['passenger-process:0']],
+       ['passenger.processed', '3', :tags => ['passenger-process:1']],
+       ['passenger.sessions', '0', :tags => ['passenger-process:1']],
+       ['passenger.busyness', '0', :tags => ['passenger-process:1']],
+       ['passenger.concurrency', '1', :tags => ['passenger-process:1']],
+       ['passenger.cpu', '0', :tags => ['passenger-process:1']],
+       ['passenger.rss', '407972', :tags => ['passenger-process:1']],
+       ['passenger.private_dirty', '124832', :tags => ['passenger-process:1']],
+       ['passenger.pss', '265607', :tags => ['passenger-process:1']],
+       ['passenger.swap', '0', :tags => ['passenger-process:1']],
+       ['passenger.real_memory', '124832', :tags => ['passenger-process:1']],
+       ['passenger.vmsize', '812536', :tags => ['passenger-process:1']]]
+    end
 
     it 'sends stats to datadog' do
       allow(Statsd).to receive(:new).and_return(statsd)
       allow(statsd).to receive(:batch).and_yield(statsd)
 
-      expect(statsd).to receive(:gauge).with('passenger.pool.used', '2')
-      expect(statsd).to receive(:gauge).with('passenger.pool.max', '5')
-      expect(statsd).to receive(:gauge).with('passenger.request_queue', '0')
-      expect(statsd).to receive(:gauge).with('passenger.capacity_used', '2')
-      expect(statsd).to receive(:gauge).with('passenger.processes_being_spawned', '0')
-      expect(statsd).to receive(:gauge).with('passenger.enabled_process_count', '2')
-      expect(statsd).to receive(:gauge).with('passenger.disabling_process_count', '0')
-      expect(statsd).to receive(:gauge).with('passenger.disabled_process_count', '0')
-      expect(statsd).to receive(:gauge).with('passenger.processed', '2', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.sessions', '0', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.busyness', '0', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.concurrency', '1', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.cpu', '0', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.rss', '409596', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.private_dirty', '126456', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.pss', '267231', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.swap', '0', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.real_memory', '126456', :tags => ['passenger-process:0'])
-      expect(statsd).to receive(:gauge).with('passenger.vmsize', '812632', :tags => ['passenger-process:0'])
-
-      expect(statsd).to receive(:gauge).with('passenger.processed', '3', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.sessions', '0', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.busyness', '0', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.concurrency', '1', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.cpu', '0', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.rss', '407972', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.private_dirty', '124832', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.pss', '265607', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.swap', '0', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.real_memory', '124832', :tags => ['passenger-process:1'])
-      expect(statsd).to receive(:gauge).with('passenger.vmsize', '812536', :tags => ['passenger-process:1'])
+      passenger_status.each do |key, *value|
+        expect(statsd).to receive(:gauge).with(key, *value)
+      end
 
       described_class.run
     end
