@@ -19,10 +19,11 @@ Metrics/BlockLength:
 Metrics/AbcSize:
   Max: 33
 
-# Offense count: 94
-# Configuration parameters: AllowURI, URISchemes.
+# Offense count: 9
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives.
+# URISchemes: http, https
 Metrics/LineLength:
-  Max: 133
+  Max: 120
 
 # Offense count: 1
 # Configuration parameters: CountComments.
