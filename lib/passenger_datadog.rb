@@ -43,6 +43,14 @@ class PassengerDatadog
           status = status.split("\n")[3..-1].join("\n") unless status.start_with?('<?xml')
           parsed = Nokogiri::XML(status)
 
+          resisting_deployment_error = parsed.xpath('//supergroups/supergroup/group').children.map(&:name).include?("resisting_deployment_error")
+
+          if resisting_deployment_error
+            s.gauge('passenger.resisting_deployment_error', 1)
+          else
+            s.gauge('passenger.resisting_deployment_error', 0)
+          end
+
           pool_used = parsed.xpath('//process_count').text
           s.gauge('passenger.pool.used', pool_used)
 
