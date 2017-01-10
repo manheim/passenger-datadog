@@ -10,38 +10,62 @@ class PassengerDatadog
 
   class << self
     def run
-      status = `passenger-status --show=xml`
-      return if status.empty?
+      app_base = "/srv/healthcare/"
+      apps = Dir["#{app_base}*"]
+      passenger_instances = {}
 
-      statsd = Statsd.new
+      apps.each do |app|
+        instance = `grep -Po '(?<=\"name\" : \")[a-zA-Z0-9]*' $(dirname $(grep -l $(cat #{app}/current/tmp/pids/passenger.pid) /tmp/passenger.*/web_server_control_process.pid))/properties.json`
+        if instance != ""
+          passenger_instances[app] = instance.strip
+        end
+      end
 
-      statsd.batch do |s|
-        # Good job Passenger 4.0.10. Return non xml in your xml output.
-        status = status.split("\n")[3..-1].join("\n") unless status.start_with?('<?xml')
-        parsed = Nokogiri::XML(status)
+      passenger_instances.each do |app, instance|
+        status = `passenger-status #{instance} --show=xml`
+        return if status.empty?
 
-        pool_used = parsed.xpath('//process_count').text
-        s.gauge('passenger.pool.used', pool_used)
-
-        pool_max = parsed.xpath('//max').text
-        s.gauge('passenger.pool.max', pool_max)
-
-        request_queue = parsed.xpath('//supergroups/supergroup/group/get_wait_list_size').text
-        s.gauge('passenger.request_queue', request_queue)
-
-        parsed.xpath('//supergroups/supergroup/group').each do |group|
-          GROUP_STATS.each do |stat|
-            value = group.xpath(stat).text
-            next if value.empty?
-            s.gauge("passenger.#{stat}", value)
-          end
+        environment = case app[-1]
+          when "s"
+            "staging"
+          when "p"
+            "production"
+          when "d"
+            "development"
         end
 
-        parsed.xpath('//supergroups/supergroup/group/processes/process').each_with_index do |process, index|
-          PROCESS_STATS.each do |stat|
-            value = process.xpath(stat).text
-            next if value.empty?
-            s.gauge("passenger.#{stat}", value, :tags => ["passenger-process:#{index}"])
+        clean_app = app.gsub(app_base,"")
+
+        statsd = Statsd.new('localhost', 8125, :tags => ["application:#{clean_app}", "environment:#{environment}"])
+
+        statsd.batch do |s|
+          # Good job Passenger 4.0.10. Return non xml in your xml output.
+          status = status.split("\n")[3..-1].join("\n") unless status.start_with?('<?xml')
+          parsed = Nokogiri::XML(status)
+
+          pool_used = parsed.xpath('//process_count').text
+          s.gauge('passenger.pool.used', pool_used)
+
+          pool_max = parsed.xpath('//max').text
+          s.gauge('passenger.pool.max', pool_max)
+
+          request_queue = parsed.xpath('//supergroups/supergroup/group/get_wait_list_size').text
+          s.gauge('passenger.request_queue', request_queue)
+
+          parsed.xpath('//supergroups/supergroup/group').each do |group|
+            GROUP_STATS.each do |stat|
+              value = group.xpath(stat).text
+              next if value.empty?
+              s.gauge("passenger.#{stat}", value)
+            end
+          end
+
+          parsed.xpath('//supergroups/supergroup/group/processes/process').each_with_index do |process, index|
+            PROCESS_STATS.each do |stat|
+              value = process.xpath(stat).text
+              next if value.empty?
+              s.gauge("passenger.#{stat}", value, :tags => ["passenger-process:#{index}"])
+            end
           end
         end
       end
