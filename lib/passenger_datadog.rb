@@ -15,7 +15,16 @@ class PassengerDatadog
       passenger_instances = {}
 
       apps.each do |app|
-        instance = `grep -Po '(?<=\"name\" : \")[a-zA-Z0-9]*' $(dirname $(grep -l $(cat #{app}/current/tmp/pids/passenger.pid) /tmp/passenger.*/web_server_control_process.pid))/properties.json`
+        instance = %x{
+          grep -Po '(?<=\"name\" : \")[a-zA-Z0-9]*' \
+          $(dirname \
+            $(grep -l \
+              $(cat #{app}/current/tmp/pids/passenger.pid) \
+              $(find /tmp/passenger.*/web_server* -name "*control_process.pid") \
+            ) | cut -d'/' -f-3 \
+          )/properties.json
+        }
+
         if instance != ""
           passenger_instances[app] = instance.strip
         end
