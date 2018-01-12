@@ -13,7 +13,11 @@ class PassengerDatadog
       status = `passenger-status --show=xml`
       return if status.empty?
 
-      statsd = Statsd.new
+      if ENV.has_key?("STATSD_HOSTNAME") && ENV.has_key?("STATSD_PORT")
+        statsd = Statsd.new ENV["STATSD_HOSTNAME"], ENV["STATSD_PORT"]
+      else
+        statsd = Statsd.new
+      end
 
       statsd.batch do |s|
         # Good job Passenger 4.0.10. Return non xml in your xml output.
