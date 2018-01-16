@@ -30,6 +30,13 @@ $ gem install passenger_datadog
 $ passenger-datadog [start|stop|restart|status]
 ```
 
+#### Configuring Datadog hostname/port
+
+```
+$ STATSD_HOSTNAME=dd-agent.local STATSD_PORT=8125 passenger-datadog [start|stop|restart|status]
+```
+
+
 ### Help
 ```
 $ passenger-datadog
