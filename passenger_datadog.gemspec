@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/manheim/passenger-datadog'
   s.licenses = ['MIT']
   s.require_paths = ['lib']
-  s.rubygems_version = '1.8.23'
   s.summary = 'A tool for sending Passenger stats to Datadog'
 
   s.add_runtime_dependency('daemons', '~> 1.0')
