@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.dirname(File.expand_path(__FILE__)) + '/../lib')
 require 'daemons'
 require 'passenger_datadog'
 
-Daemons.run_proc('passenger-datadog', :dir_mode => :system) do
+Daemons.run_proc('passenger-datadog', dir_mode: :system) do
   loop do
     PassengerDatadog.run
     sleep(30)

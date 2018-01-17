@@ -22,6 +22,9 @@ in Passenger, make sure that same version of Passenger is installed for both use
 ```
 $ gem install passenger_datadog
 ```
+## Support
+1.x Ruby >= 2.2
+0.x Ruby < 2.2
 
 ## Usage
 

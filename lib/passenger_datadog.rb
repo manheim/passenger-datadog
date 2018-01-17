@@ -1,19 +1,20 @@
 # frozen_string_literal: true
+
 require 'nokogiri'
-require 'statsd'
+require 'datadog/statsd'
 
 class PassengerDatadog
-  GROUP_STATS = %w(capacity_used processes_being_spawned enabled_process_count
-                   disabling_process_count disabled_process_count).freeze
-  PROCESS_STATS = %w(processed sessions busyness concurrency cpu rss
-                     private_dirty pss swap real_memory vmsize).freeze
+  GROUP_STATS = %w[capacity_used processes_being_spawned enabled_process_count
+                   disabling_process_count disabled_process_count].freeze
+  PROCESS_STATS = %w[processed sessions busyness concurrency cpu rss
+                     private_dirty pss swap real_memory vmsize].freeze
 
   class << self
     def run
       status = `passenger-status --show=xml`
       return if status.empty?
 
-      statsd = Statsd.new
+      statsd = Datadog::Statsd.new
 
       statsd.batch do |s|
         # Good job Passenger 4.0.10. Return non xml in your xml output.
@@ -41,7 +42,7 @@ class PassengerDatadog
           PROCESS_STATS.each do |stat|
             value = process.xpath(stat).text
             next if value.empty?
-            s.gauge("passenger.#{stat}", value, :tags => ["passenger-process:#{index}"])
+            s.gauge("passenger.#{stat}", value, tags: ["passenger-process:#{index}"])
           end
         end
       end
