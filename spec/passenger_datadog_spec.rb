@@ -2,8 +2,8 @@
 require 'spec_helper'
 
 describe PassengerDatadog do
-  let(:Statsd) { double(Statsd) }
-  let(:statsd) { instance_double(Statsd) }
+  let(:Statsd) { double(Datadog::Statsd) }
+  let(:statsd) { instance_double(Datadog::Statsd) }
 
   context 'passenger not running' do
     before do
@@ -11,7 +11,7 @@ describe PassengerDatadog do
     end
 
     it 'does not send stats to datadog' do
-      expect(Statsd).not_to receive(:new)
+      expect(Datadog::Statsd).not_to receive(:new)
 
       described_class.run
     end
@@ -87,7 +87,7 @@ describe PassengerDatadog do
     end
 
     it 'sends stats to datadog' do
-      allow(Statsd).to receive(:new).and_return(statsd)
+      allow(Datadog::Statsd).to receive(:new).and_return(statsd)
       allow(statsd).to receive(:batch).and_yield(statsd)
 
       expect(statsd).not_to receive(:gauge).with('passenger.busyness', anything)
@@ -143,7 +143,7 @@ describe PassengerDatadog do
     end
 
     it 'sends stats to datadog' do
-      allow(Statsd).to receive(:new).and_return(statsd)
+      allow(Datadog::Statsd).to receive(:new).and_return(statsd)
       allow(statsd).to receive(:batch).and_yield(statsd)
 
       passenger_status.each do |key, *value|

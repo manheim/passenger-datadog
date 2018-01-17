@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'nokogiri'
-require 'statsd'
+require 'datadog/statsd'
 
 class PassengerDatadog
   GROUP_STATS = %w(capacity_used processes_being_spawned enabled_process_count
@@ -13,7 +13,7 @@ class PassengerDatadog
       status = `passenger-status --show=xml`
       return if status.empty?
 
-      statsd = Statsd.new
+      statsd = Datadog::Statsd.new
 
       statsd.batch do |s|
         # Good job Passenger 4.0.10. Return non xml in your xml output.

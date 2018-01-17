@@ -21,9 +21,8 @@ Gem::Specification.new do |s|
   s.summary = 'A tool for sending Passenger stats to Datadog'
 
   s.add_runtime_dependency('daemons', '~> 1.0')
-  s.add_runtime_dependency('dogstatsd-ruby', '~> 1.5')
+  s.add_runtime_dependency('dogstatsd-ruby', '>= 2.0.0', '< 4.0.0')
   s.add_runtime_dependency('nokogiri', '~> 1.0')
-  s.add_runtime_dependency('rack', '~> 1.6', '>= 1.6.4')
   s.add_runtime_dependency('passenger', '>= 4.0.0', '<= 6.0.0')
 
   s.add_development_dependency('rake', '~> 10.1')
