@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   DisplayCopNames: true
   TargetRubyVersion: 2.2
@@ -8,6 +6,8 @@ AllCops:
 # Configuration parameters: CountComments.
 Metrics/BlockLength:
   Max: 29
+  Exclude:
+    - 'spec/**/*'
 
 # Offense count: 1
 Metrics/AbcSize:
@@ -35,7 +35,3 @@ Naming/FileName:
 Style/Documentation:
   Exclude:
     - 'lib/passenger_datadog.rb'
-
-# This is needed for Ruby 1.8.7 compatibility
-Style/HashSyntax:
-  EnforcedStyle: hash_rockets
