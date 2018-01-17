@@ -2,6 +2,12 @@
 
 ## master (unreleased)
 
+##  1.0.0 (2018-01-16)
+
+### Changes
+
+* Drop support for Ruby < 2.2
+
 ### Bug Fixes
 
 * Do not send empty stats from Passenger 4 to Datadog
