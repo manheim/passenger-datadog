@@ -24,6 +24,7 @@ $ gem install passenger_datadog
 ```
 ## Support
 1.x Ruby >= 2.2
+
 0.x Ruby < 2.2
 
 ## Usage
