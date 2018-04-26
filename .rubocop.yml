@@ -34,4 +34,4 @@ Naming/FileName:
 # Configuration parameters: Exclude.
 Style/Documentation:
   Exclude:
-    - 'lib/passenger_datadog.rb'
+    - 'lib/**/*'

@@ -25,7 +25,7 @@ module Parsers
     end
 
     def key_for(key)
-      [PREFIX, prefix, key].compact.join(".")
+      [PREFIX, prefix, key].compact.join('.')
     end
   end
 end
