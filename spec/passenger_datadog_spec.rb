@@ -113,9 +113,11 @@ describe PassengerDatadog do
     let(:passenger_status) do
       [['passenger.pool.used', '2'],
        ['passenger.pool.max', '5'],
-       ['passenger.request_queue', '0'],
+       ['passenger.request_queue', '999'],
 
        ['passenger.passenger_datadog_development.capacity_used', '2'],
+       ['passenger.passenger_datadog_development.get_wait_list_size', '111'],
+       ['passenger.passenger_datadog_development.disable_wait_list_size', '0'],
        ['passenger.passenger_datadog_development.processes_being_spawned', '0'],
        ['passenger.passenger_datadog_development.enabled_process_count', '2'],
        ['passenger.passenger_datadog_development.disabling_process_count', '0'],

@@ -5,7 +5,7 @@
    <process_count>2</process_count>
    <max>5</max>
    <capacity_used>2</capacity_used>
-   <get_wait_list_size>0</get_wait_list_size>
+   <get_wait_list_size>999</get_wait_list_size>
    <supergroups>
       <supergroup>
          <name>/passenger_datadog (development)</name>
@@ -23,7 +23,7 @@
             <disabling_process_count>0</disabling_process_count>
             <disabled_process_count>0</disabled_process_count>
             <capacity_used>2</capacity_used>
-            <get_wait_list_size>0</get_wait_list_size>
+            <get_wait_list_size>111</get_wait_list_size>
             <disable_wait_list_size>0</disable_wait_list_size>
             <processes_being_spawned>0</processes_being_spawned>
             <life_status>ALIVE</life_status>
