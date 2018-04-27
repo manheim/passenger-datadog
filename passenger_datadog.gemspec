@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'passenger_datadog'
-  s.version = '1.0.0'
+  s.version = '1.1.0'
   s.platform = Gem::Platform::RUBY
   s.required_ruby_version = '>= 2.2.0'
   s.authors = ['Ryan Rosenblum']
@@ -11,10 +11,11 @@ Gem::Specification.new do |s|
   DESCRIPTION
 
   s.email = 'passenger_datadog@manheim.com'
-  s.files = %w[lib/passenger_datadog.rb bin/passenger-datadog bin/passenger-datadog]
+  s.files = `git ls-files bin lib LICENSE.txt README.md`
+            .split($RS)
   s.test_files = []
   s.executables = %w[passenger-datadog]
-  s.extra_rdoc_files = ['LICENSE', 'README.md']
+  s.extra_rdoc_files = ['LICENSE.txt', 'README.md']
   s.homepage = 'https://github.com/manheim/passenger-datadog'
   s.licenses = ['MIT']
   s.require_paths = ['lib']

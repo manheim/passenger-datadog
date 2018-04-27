@@ -2,6 +2,9 @@
 
 ## master (unreleased)
 
+
+## 1.1.0 (2018-04-27)
+
 ### New features
 
 * Improve support for multiple supergroups. Metrics for multiple supergroups will now be prefixed with name of the supergroup. ([@krasnoukhov][])
