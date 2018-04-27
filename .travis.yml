@@ -1,17 +1,20 @@
 language: ruby
 rvm:
-  - 2.2.9
-  - 2.3.6
-  - 2.4.3
+  - 2.2
+  - 2.3
+  - 2.4
+  - 2.5
   - ruby-head
   - jruby-19mode
-  - jruby-9.0.1.0
+  - jruby-9.0.5.0
+  - jruby-9.1.17.0
   - rbx-3
 matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: rbx-3
-    - rvm: jruby-9.0.1.0
+    - rvm: jruby-9.0.5.0
+    - rvm: jruby-9.1.17.0
   fast_finish: true
 script:
   - bundle exec rake
