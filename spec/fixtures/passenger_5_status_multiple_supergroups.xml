@@ -118,5 +118,89 @@
             </processes>
          </group>
       </supergroup>
+      <supergroup>
+         <name>/passenger_datadog (production)</name>
+         <state>READY</state>
+         <get_wait_list_size>0</get_wait_list_size>
+         <capacity_used>3</capacity_used>
+         <group default="true">
+            <name>/passenger_datadog (production)</name>
+            <component_name>/passenger_datadog (production)</component_name>
+            <app_root>/passenger_datadog</app_root>
+            <app_type>rack</app_type>
+            <environment>development</environment>
+            <uuid>hVLZWbyGdHplIJ7S1Bd5</uuid>
+            <enabled_process_count>2</enabled_process_count>
+            <disabling_process_count>0</disabling_process_count>
+            <disabled_process_count>0</disabled_process_count>
+            <capacity_used>2</capacity_used>
+            <get_wait_list_size>111</get_wait_list_size>
+            <disable_wait_list_size>0</disable_wait_list_size>
+            <processes_being_spawned>0</processes_being_spawned>
+            <life_status>ALIVE</life_status>
+            <user>user</user>
+            <uid>500</uid>
+            <group>group</group>
+            <gid>1000</gid>
+            <options>
+               <app_root>/passenger_datadog</app_root>
+               <app_group_name>/passenger_datadog (production)</app_group_name>
+               <app_type>rack</app_type>
+               <start_command>/usr/bin/ruby rack-loader.rb</start_command>
+               <startup_file>/passenger_datadog/config.ru</startup_file>
+               <process_title>Passenger RubyApp</process_title>
+               <log_level>3</log_level>
+               <start_timeout>90000</start_timeout>
+               <environment>development</environment>
+               <base_uri>/</base_uri>
+               <spawn_method>smart</spawn_method>
+               <default_user>nobody</default_user>
+               <default_group>nobody</default_group>
+               <integration_mode>apache</integration_mode>
+               <ruby>/usr/bin/ruby</ruby>
+               <python>python</python>
+               <nodejs>node</nodejs>
+               <ust_router_address>unix:/tmp/passenger.JEe5Fw6/agents.s/ust_router</ust_router_address>
+               <ust_router_username>logging</ust_router_username>
+               <ust_router_password>password</ust_router_password>
+               <debugger>false</debugger>
+               <analytics>false</analytics>
+               <api_key>api_key</api_key>
+               <min_processes>1</min_processes>
+               <max_processes>0</max_processes>
+               <max_preloader_idle_time>300</max_preloader_idle_time>
+               <max_out_of_band_work_instances>1</max_out_of_band_work_instances>
+            </options>
+            <processes>
+               <process>
+                  <pid>30834</pid>
+                  <sticky_session_id>376651144</sticky_session_id>
+                  <gupid>16f8e47-qENzxOi9bQ</gupid>
+                  <concurrency>1</concurrency>
+                  <sessions>0</sessions>
+                  <busyness>0</busyness>
+                  <processed>2</processed>
+                  <spawner_creation_time>1445288098362036</spawner_creation_time>
+                  <spawn_start_time>1445288105478892</spawn_start_time>
+                  <spawn_end_time>1445288105642056</spawn_end_time>
+                  <last_used>1445288133121316</last_used>
+                  <last_used_desc>1h 2m 46s ago</last_used_desc>
+                  <uptime>1h 3m 14s</uptime>
+                  <life_status>ALIVE</life_status>
+                  <enabled>ENABLED</enabled>
+                  <has_metrics>true</has_metrics>
+                  <cpu>0</cpu>
+                  <rss>409596</rss>
+                  <pss>267231</pss>
+                  <private_dirty>126456</private_dirty>
+                  <swap>0</swap>
+                  <real_memory>126456</real_memory>
+                  <vmsize>812632</vmsize>
+                  <process_group_id>30623</process_group_id>
+                  <command>Passenger RubyApp: /passenger_datadog (production)</command>
+               </process>
+            </processes>
+         </group>
+      </supergroup>
    </supergroups>
 </info>

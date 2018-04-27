@@ -7,7 +7,7 @@ require 'passenger_datadog'
 
 Daemons.run_proc('passenger-datadog', dir_mode: :system) do
   loop do
-    PassengerDatadog.run
+    PassengerDatadog.new.run
     sleep(30)
   end
 end
